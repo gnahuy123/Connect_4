@@ -21,4 +21,9 @@ Your Task:
     objective:
         ensure that your bot has the best winrate against other strategies
     
-
+HOW TO START:
+    1. Scan through Main.py
+    2. duplicate template.py and rename it
+    3. write your function
+    4. import your bot into the top of the main file
+    5. enter $python main.py
