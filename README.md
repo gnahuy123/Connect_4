@@ -5,6 +5,11 @@ Your Task:
     input -> 6 x 7 board ("-" is empty slot), your symbol in string form
     output -> column integer from 0 to 6
 
+    0,0 is bottom left;
+    6,0 is bottom right; 
+    0,5 is top left; 
+    6,5 is top right
+    
     Empty board:
 
     - | - | - | - | - | - | -
