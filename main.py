@@ -1,3 +1,5 @@
+#Import your bots here
+#import bots.<PYTHON SCRIPT NAME>
 import bots
 import bots.Play_urself
 import bots.Yu_Hangs_Bot_v0
@@ -64,9 +66,13 @@ def check_win(board):
     return False
 
 class Player:
-    def __init__(self, symbol: str, func):
+    def __init__(self, symbol: str, func, name=None):
         self.symbol = symbol
         self.func = func
+        if name == None:
+            self.name = "Player" + symbol
+        else:
+            self.name = name 
 
     def move(self, board) -> int:
         return self.func(board, self.symbol)
@@ -89,13 +95,13 @@ def game(player0, player1, print_bool):
     while not is_draw(board):
         
         col = cur_player.move(board)
-        
+        #check bounds
         change_board(board, col, cur_player.symbol)
         idx = player_idx % 2
         if check_win(board):
             if print_bool:
                 print_board(board)
-                print("Player {0} wins".format(idx))
+            print("Player {0} wins".format(idx))
             return idx
         if idx == 0:
             cur_player = player1
@@ -117,15 +123,15 @@ def main():
             raise Exception("BenchMark bot doesnt pass testcase" )
     print("Bots pass test cases")
 
-    player0 = Player("0", bot0)
+    player0 = Player("0", bot0, "Yu Hang v0") #add additional parameter behind if you wanna name
     player1 = Player("1", bot1)   
-    n = 1000
+    n = 10000 
     ls = [0,0,0]     
     for _ in range(n):
-       ls[game(player0, player1, True)] += 1
+       ls[game(player0, player1, False)] += 1 #toggle last parameter to true if u wanna see the boards
 
-    print("Player0: {0}% ".format(100*ls[0]/n))
-    print("Player1: {0}% ".format(100*ls[1]/n))
+    print("{1}: {0}% ".format(100*ls[0]/n, player0.name))
+    print("{1}: {0}% ".format(100*ls[1]/n, player1.name))
     print("Draw: {0}%".format(100*ls[2]/n))
 
 def play_urself():
@@ -135,7 +141,7 @@ def play_urself():
         if not test_bot(bot1):
             raise Exception("BenchMark bot does pass testcase")
         
-    player0 = Player("0", bot0)
+    player0 = Player("0", bot0) #feel free to change the names
     player1 = Player("1", bot1)   
 
     res = game(player0, player1, True)
@@ -150,11 +156,3 @@ if __name__ == "__main__":
     main()
 
 #play_urself()
-        
-        
-        
-        
-
-        
-
-    
